@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library</title>
+</head>
+<body>
+    <h1>Library</h1>
+    <form action="{{ url_for('search_books') }}" method="GET">
+        <input type="text" name="keyword" placeholder="Search by title or author">
+        <input type="submit" value="Search">
+    </form>
+    <ul>
+    {% for book in books %}
+        <li>
+            {{ book.title }} by {{ book.author.name }}
+            <form action="{{ url_for('delete_book', book_id=book.id) }}" method="POST" style="display:inline;">
+                <input type="submit" value="Delete Book">
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+    <a href="{{ url_for('add_author') }}">Add Author</a> |
+    <a href="{{ url_for('add_book') }}">Add Book</a>
+</body>
+</html>
